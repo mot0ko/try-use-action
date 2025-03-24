@@ -20,4 +20,12 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: junit-report
-          path: README.md
+          path: python-report.xml
+          
+      - name: Publish Test Results
+        uses: dorny/test-reporter@v1
+        if: always()  # ensures it runs even if tests fail
+        with:
+          name: JUnit Tests
+          path: python-report.xml
+          reporter: java-junit  # for JUnit XML format
