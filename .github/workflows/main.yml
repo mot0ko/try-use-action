@@ -1,4 +1,10 @@
-on: [push]
+on:
+  pull_request:
+  push:
+permissions:
+  contents: read
+  actions: read
+  checks: write
 
 jobs:
   hello_world_job:
@@ -23,7 +29,7 @@ jobs:
           path: python-report.xml
           
       - name: Publish Test Results
-        uses: dorny/test-reporter@v1
+        uses: dorny/test-reporter@v2
         if: always()  # ensures it runs even if tests fail
         with:
           name: JUnit Tests
